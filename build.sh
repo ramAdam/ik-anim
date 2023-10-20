@@ -16,7 +16,7 @@ if [ $? -eq 0 ]; then
     # Check if build succeeded
     if [ $? -eq 0 ]; then
         # Execute the program
-        ./src/HelloWorldSFML   # Replace with your actual executable name
+        ./src/IKinematics   # Replace with your actual executable name
     else
         echo "Build failed. Not executing the program."
     fi
