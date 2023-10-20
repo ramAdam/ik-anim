@@ -35,7 +35,7 @@ int main()
         window.clear();
         // window.draw(text);
         segment.draw(window);
-
+        segment.follow(window);
         window.display();
     }
 

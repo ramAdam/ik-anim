@@ -21,6 +21,21 @@ Segment::Segment(float x, float y, float angle, float length)
     line[1].color = sf::Color::White;
 }
 
+void Segment::follow(sf::RenderWindow &window)
+{
+    // Get the mouse coordinates
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+    // Convert mouse coordinates to world coordinates
+    sf::Vector2f worldMousePosition = window.mapPixelToCoords(mousePosition);
+
+    // Calculate the angle between 'a' and the mouse coordinates
+    float angle = atan2(worldMousePosition.y - a.y, worldMousePosition.x - a.x) * (180 / 3.14f);
+
+    // Set the new angle to point towards the mouse coordinates
+    setAngle(angle);
+}
+
 void Segment::draw(sf::RenderWindow &window)
 {
     window.draw(line);

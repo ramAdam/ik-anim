@@ -13,6 +13,7 @@ public:
     Segment(float x , float y, float angle, float length);
     void draw(sf::RenderWindow& window);
     void setAngle(float angle);
+    void follow(sf::RenderWindow& window);
 
 private:
     sf::Vector2f a;       // First endpoint
