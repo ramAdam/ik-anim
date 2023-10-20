@@ -10,7 +10,7 @@ int main()
     // Create a text object
     // sf::Font font;
 
-    Segment segment(400, 300, 90, 100);
+    Segment segment(400, 300, 0, 100);
 
 
     // if (!font.loadFromFile("arial/arial.ttf")) // You need to have a font file (arial.ttf) in the same directory as your source code

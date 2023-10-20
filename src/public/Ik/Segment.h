@@ -15,9 +15,11 @@ public:
     void setAngle(float angle);
 
 private:
-    sf::Vector2f a;
+    sf::Vector2f a;       // First endpoint
+    sf::Vector2f b;       // Second endpoint
+    sf::VertexArray line; // Vertex array for drawing the line
+
     float length;
-    float angle;
 };
 
 #endif // SEGMENT_H
