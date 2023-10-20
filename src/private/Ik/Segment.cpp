@@ -27,13 +27,63 @@ void Segment::follow(sf::RenderWindow &window)
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
     // Convert mouse coordinates to world coordinates
-    sf::Vector2f worldMousePosition = window.mapPixelToCoords(mousePosition);
+    sf::Vector2f target = window.mapPixelToCoords(mousePosition);
 
-    // Calculate the angle between 'a' and the mouse coordinates
-    float angle = atan2(worldMousePosition.y - a.y, worldMousePosition.x - a.x) * (180 / 3.14f);
+    // Calculate the direction vector from 'a' to the mouse pointer
+    sf::Vector2f direction = target - a;
 
-    // Set the new angle to point towards the mouse coordinates
-    setAngle(angle);
+    // Normalize the direction vector
+    float magnitude = sqrt(direction.x * direction.x + direction.y * direction.y);
+    direction = sf::Vector2f(direction.x / magnitude, direction.y / magnitude);
+
+    // Set the magnitude of the direction vector to 'length'
+    direction *= length;
+
+    // Reverse the direction vector
+    direction.x = -direction.x;
+    direction.y = -direction.y;
+
+
+    // set end point a 
+    setEndPoint(target.x + direction.x, target.y + direction.y, 0);
+
+    // set endpoint b
+    setEndPoint(a.x + direction.x, a.y + direction.y, 1);
+
+       
+}
+
+void Segment::setEndPoint(float x, float y, const int index )
+{
+    if (index == 0)
+    {
+        this->line[0].position.x = x;
+        this->line[0].position.y = y;
+        this->a.x = this->line[0].position.x;
+        this->a.y = this->line[0].position.y;
+    }
+    else
+    {
+        this->line[1].position.x = x;
+        this->line[1].position.y = y;
+        this->b.x = this->line[1].position.x;
+        this->b.y = this->line[1].position.y;
+    }
+}
+
+float Segment::magnitude(const sf::Vector2f vector)
+{
+    return sqrt(vector.x * vector.x + vector.y * vector.y);
+}
+
+void Segment::addVectorToA(const float x, const float y)
+{
+    setEndPoint(line[0].position.x + x, line[0].position.y + y, 0);
+}
+
+void Segment::addVectorToB(const float x, const float y)
+{
+    setEndPoint(line[1].position.x + x, line[1].position.y + y, 1);
 }
 
 void Segment::draw(sf::RenderWindow &window)
@@ -41,9 +91,11 @@ void Segment::draw(sf::RenderWindow &window)
     window.draw(line);
 }
 
-void Segment::setAngle(float angle)
+void Segment::setAngle(const float angle)
 {
     // Update the angle
     this->line[1].position.x = a.x + length * cos(angle * (3.14f / 180));
     this->line[1].position.y = a.y + length * sin(angle * (3.14f / 180));
+
+    setEndPoint(this->line[1].position.x, this->line[1].position.y, 1);
 }
