@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Animation/Frame.h"
+#include "Ik/Segment.h"
 
 int main()
 {
@@ -7,19 +8,20 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "Hello World");
 
     // Create a text object
-    sf::Font font;
-    Frame frame;
+    // sf::Font font;
 
-    if (!font.loadFromFile("arial/arial.ttf")) // You need to have a font file (arial.ttf) in the same directory as your source code
-    {
-        return EXIT_FAILURE;
-    }
+    Segment segment(400, 300, 90, 100);
 
-    sf::Text text("Hello, World!", font, 50);
-    text.setFillColor(sf::Color::White);
-    text.setPosition(250, 250);
 
-    frame.draw();
+    // if (!font.loadFromFile("arial/arial.ttf")) // You need to have a font file (arial.ttf) in the same directory as your source code
+    // {
+    //     return EXIT_FAILURE;
+    // }
+
+    // sf::Text text("Hello, World!", font, 50);
+    // text.setFillColor(sf::Color::White);
+    // text.setPosition(250, 250);
+
 
     while (window.isOpen())
     {
@@ -31,7 +33,9 @@ int main()
         }
 
         window.clear();
-        window.draw(text);
+        // window.draw(text);
+        segment.draw(window);
+
         window.display();
     }
 
