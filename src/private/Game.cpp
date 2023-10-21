@@ -11,22 +11,11 @@ int main()
     // Create a window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Hello World");
 
-    // Create a text object
-    // sf::Font font;
 
     Segment segment(400, 300, 0, 100);
-    Segment seg2(400, 300, 0, 100, &segment);
+    Segment seg2(400, 300, 0, 100);
 
-    assert(seg2.getParent() != nullptr && "seg2 parent is null");
-
-    // if (!font.loadFromFile("arial/arial.ttf")) // You need to have a font file (arial.ttf) in the same directory as your source code
-    // {
-    //     return EXIT_FAILURE;
-    // }
-
-    // sf::Text text("Hello, World!", font, 50);
-    // text.setFillColor(sf::Color::White);
-    // text.setPosition(250, 250);
+    assert(seg2.getParent() == nullptr && "seg2 parent is null");
 
 
     while (window.isOpen())
