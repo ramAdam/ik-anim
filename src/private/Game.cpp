@@ -1,9 +1,13 @@
 #include <SFML/Graphics.hpp>
+#include <cassert>
 #include "Animation/Frame.h"
 #include "Ik/Segment.h"
 
+sf::Vector2f getMousePosition(sf::RenderWindow &window);
+
 int main()
 {
+
     // Create a window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Hello World");
 
@@ -11,7 +15,9 @@ int main()
     // sf::Font font;
 
     Segment segment(400, 300, 0, 100);
+    Segment seg2(400, 300, 0, 100, &segment);
 
+    assert(seg2.getParent() != nullptr && "seg2 parent is null");
 
     // if (!font.loadFromFile("arial/arial.ttf")) // You need to have a font file (arial.ttf) in the same directory as your source code
     // {
@@ -33,11 +39,25 @@ int main()
         }
 
         window.clear();
-        // window.draw(text);
+        auto mousePos = getMousePosition(window);
         segment.draw(window);
-        segment.follow(window);
+        // seg2.draw(window);
+        segment.follow(mousePos);
+        seg2.follow(segment.getA());
+
+        seg2.draw(window);
         window.display();
     }
 
     return 0;
+}
+
+// get mouse postion in world coordinates
+sf::Vector2f getMousePosition(sf::RenderWindow &window)
+{
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+    sf::Vector2f target = window.mapPixelToCoords(mousePosition);
+
+    return target;
+    
 }
