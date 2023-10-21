@@ -18,16 +18,18 @@ public:
     void draw(sf::RenderWindow& window);
     void setAngle(float angle);
     void follow(const sf::Vector2f target);
+    /* follows parent vector A if the parent is set*/
+    void follow();
 
     /* set end points index 0 for endpoint a and index 1 for endpoint b*/
     void setEndPoint(const float x, const float y, const int index);
     void addVectorToA(const float x, const float y);
     void addVectorToB(const float x, const float y);
 
-    void set_a(const sf::Vector2f& a) { this->a = a; }
+    void set_a(const sf::Vector2f &a);
 
-    const sf::Vector2f& getA() const { return a; }
-    const sf::Vector2f& getB() const { return b; }
+    const sf::Vector2f &getA() const { return a; }
+    const sf::Vector2f &getB() const { return b; }
 
     const Segment* getParent() const { return parent; }
 

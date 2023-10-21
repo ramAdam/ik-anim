@@ -13,9 +13,9 @@ int main()
 
 
     Segment segment(400, 300, 0, 100);
-    Segment seg2(400, 300, 0, 100);
+    Segment seg2(400, 300, 0, 100, &segment);
 
-    assert(seg2.getParent() == nullptr && "seg2 parent is null");
+    assert(seg2.getParent() != nullptr && "seg2 parent is null");
 
 
     while (window.isOpen())
@@ -29,12 +29,12 @@ int main()
 
         window.clear();
         auto mousePos = getMousePosition(window);
-        segment.draw(window);
-        // seg2.draw(window);
-        segment.follow(mousePos);
-        seg2.follow(segment.getA());
 
+        segment.follow(mousePos);
+        segment.draw(window);
+        
         seg2.draw(window);
+
         window.display();
     }
 

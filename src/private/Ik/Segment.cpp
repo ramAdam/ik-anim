@@ -33,17 +33,7 @@ Segment::Segment(float x, float y, float angle, float length, Segment* parent)
 
 void Segment::follow(const sf::Vector2f target)
 {
-    // if(this->parent != nullptr)
-    // {
-    //     set_a(this->parent->getB());
-    // }
    
-    // Get the mouse coordinates
-    // sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-    // Convert mouse coordinates to world coordinates
-    // sf::Vector2f target = window.mapPixelToCoords(mousePosition);
-
     // Calculate the direction vector from 'a' to the mouse pointer
     sf::Vector2f direction = target - a;
 
@@ -66,6 +56,23 @@ void Segment::follow(const sf::Vector2f target)
     // setEndPoint(a.x + direction.x, a.y + direction.y, 1);
     setEndPoint(target.x , target.y, 1);
 }
+
+void Segment::follow()
+{
+    if(this->parent != nullptr)
+    {
+       follow(this->parent->getA());
+    }
+}
+
+void Segment::set_a(const sf::Vector2f &a)
+{
+    this->line[0].position = a;
+    this->a.x = this->line[0].position.x;
+    this->a.y = this->line[0].position.y;
+}
+
+
 
 void Segment::setEndPoint(float x, float y, const int index )
 {
@@ -102,6 +109,7 @@ void Segment::addVectorToB(const float x, const float y)
 
 void Segment::draw(sf::RenderWindow &window)
 {
+    follow();
     window.draw(line);
 }
 
