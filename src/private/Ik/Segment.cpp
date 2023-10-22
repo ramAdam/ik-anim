@@ -25,6 +25,13 @@ Segment::Segment(float x, float y, float angle, float length)
     line[1].color = sf::Color::White;
 }
 
+Segment::Segment(float x, float y, float angle, float length, sf::Color color)
+:Segment(x, y, angle, length)
+{
+    this->line[0].color = color;
+    this->line[1].color = color;
+}
+
 Segment::Segment(float x, float y, float angle, float length, Segment* parent)
 :Segment(x, y, angle, length)
 {
@@ -62,6 +69,11 @@ void Segment::follow()
     if(this->parent != nullptr)
     {
        follow(this->parent->getA());
+       std::cout << "parent is not null" << std::endl;
+    }else
+    {
+        std::cout << "parent is null" << std::endl;
+    
     }
 }
 

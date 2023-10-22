@@ -13,6 +13,7 @@ class Segment
 public:
     Segment(float x , float y, float angle, float length);
     Segment(float x, float y, float angle, float length, Segment* parent);
+    Segment(float x, float y, float angle, float length, sf::Color color);
     ~Segment();
 
     void draw(sf::RenderWindow& window);
